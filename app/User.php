@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'provider', 'provider_id'
     ];
 
     /**
@@ -27,4 +27,16 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'api_token'
     ];
+
+    /**
+    * Mutator email
+    */
+    public function setEmailAttribute($value) {
+        if (empty($value)) {
+            $this->attributes['email'] = NULL;
+        } else {
+            $this->attributes['email'] = $value;
+        }
+        $this->attributes['email'] = strtolower($value);
+    }
 }

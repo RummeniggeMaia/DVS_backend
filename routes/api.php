@@ -4,6 +4,8 @@ use Illuminate\Http\Request;
 
 Route::post('login', 'Auth\UserController@login');
 Route::post('register', 'Auth\UserController@register');
+Route::get('auth/{provider}', 'Auth\UserController@redirectToProvider');
+Route::get('auth/{provider}/callback', 'Auth\UserController@handleProviderCallback');
 
 Route::group(['middleware' => 'auth:api'], function(){
 	Route::get('alimentos', 'AlimentoController@index');
