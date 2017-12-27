@@ -8,6 +8,7 @@ Route::get('auth/{provider}', 'Auth\UserController@redirectToProvider');
 Route::get('auth/{provider}/callback', 'Auth\UserController@handleProviderCallback');
 
 Route::group(['middleware' => 'auth:api'], function(){
+	Route::get('details', 'Auth\UserController@details');
 	Route::get('alimentos', 'AlimentoController@index');
 	Route::get('cardapios', 'CardapioController@index');
 	Route::get('medidas', 'MedidaController@index');
