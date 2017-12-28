@@ -16,7 +16,8 @@ class UserController extends Controller
     public function login() {
         if(Auth::attempt(['email' => request('email'), 'password' => request('password')])){
             $user = Auth::user();
-            $success['token'] =  $user->createToken('MyApp')->accessToken;
+            $success['user'] = $user;
+            $success['user']['token'] =  $user->createToken('DVS')->accessToken;
             return response()->json(['success' => $success], 200);
         }
         else{
@@ -32,7 +33,9 @@ class UserController extends Controller
      */
     public function register(Request $request) {
         $validator = Validator::make($request->all(), [
-            'name' => 'required',
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'genre' => 'required',
             'email' => 'required|email',
             'password' => 'required',
             'c_password' => 'required|same:password',
